@@ -34,6 +34,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun MyApp() {
+    var moneyCounter by remember {
+        mutableStateOf(0)
+    }
+
     // A surface container using the 'background' color from the theme
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -43,13 +47,15 @@ private fun MyApp() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "€100", style = TextStyle(
+            Text(text = "€$moneyCounter", style = TextStyle(
                 color = Color.White,
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold
             ))
             Spacer(modifier = Modifier.height(130.dp))
-            CreateCircle()
+            CreateCircle(moneyCounter) { newValue ->
+                moneyCounter = newValue
+            }
         }
 
     }
@@ -57,17 +63,12 @@ private fun MyApp() {
 
 @Preview
 @Composable
-private fun CreateCircle() {
-    var moneyCounter by remember {
-        mutableStateOf(0)
-    }
-
-
+private fun CreateCircle(moneyCounter: Int, updateMoneyCounter: (Int) -> Unit ) {
     Card( modifier = Modifier
         .padding(4.dp)
         .size(105.dp)
         .clickable {
-            moneyCounter += 1
+           updateMoneyCounter(moneyCounter + 1)
         },
     shape = CircleShape,
     elevation = 6.dp) {
