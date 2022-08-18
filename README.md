@@ -1,4 +1,4 @@
-Money Counter App from Udemy Course
+Money Counter App from Udemy Course - Android Jetpack Compose: The Comprehensive Bootcamp \[2022]
 
 - Uses Spacer to create space between widgets
 - Contains making widget clickable
